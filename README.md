@@ -7,7 +7,9 @@ Arcel LLC open-source projects, and is the storage backend for the
 | File | Purpose |
 |---|---|
 | `cla.md` | The agreement text contributors agree to. |
-| `signatures/cla.json` | CLA Assistant's signature store (populated by the bot). |
+| `signatures/contributors.json` | Central record of signed contributors (maintained by the CLA bot). |
+| `cla-bot.py` | The CLA enforcement bot, run by each project's `cla.yml` workflow. |
+| `signatures/cla.json` | Reserved for CLA Assistant (kept for compatibility). |
 
 ## Why a CLA
 
@@ -20,33 +22,18 @@ projects commercially.
 
 ## How contributors sign
 
-Contributors must sign before their contribution is merged. Two paths:
+Contributors must sign before their contribution is merged. The org runs a
+**self-hosted CLA bot** (no external service): each project's
+`.github/workflows/cla.yml` runs `cla-bot.py` on every pull request. It:
 
-1. **CLA Assistant (automatic).** Once the [CLA Assistant GitHub App][app] is
-   installed on the org and configured with this repo as its "CLA repository,"
-   the bot prompts contributors to sign directly on their pull requests.
-2. **Email (manual).** Until the bot is installed (or as a fallback), a
-   contributor emails `legal@arcel.org` with the exact text in `cla.md`'s
-   *How to sign* section. The process and wording are documented there.
+1. Posts a **CLA** status (required by branch protection) and a comment
+   prompting the author to sign.
+2. When the author replies `I agree to the Arcel Contributor License
+   Agreement`, records their GitHub username in
+   `signatures/contributors.json` and flips the status to green.
 
-Project `CONTRIBUTING.md` files should point contributors here — see
-Relay / Seam / Fob.
+A maintainer can also sign a contributor in by adding their username to
+`signatures/contributors.json` (and keeping `cla-bot.py`'s fields intact).
 
-## Setting up CLA Assistant (maintainers)
-
-1. Install the [CLA Assistant GitHub App][app] on the Arcel-Org organization.
-2. In the app's settings choose **Arcel-Org/cla** as the CLA repository.
-   The CLA text is `cla.md` (default path) and signatures are stored in
-   `signatures/cla.json` (default layout — already initialized empty).
-3. Select the repositories the bot should manage (Relay, Seam, Fob, …).
-4. Open a test PR to confirm the bot posts its status.
-
-Until the app is installed, the manual email path above is the operating
-process — keep the wording in `cla.md` accurate.
-
-## License
-
-The agreement text in `cla.md` is provided for use by Arcel LLC and its
-projects. Questions: [legal@arcel.org](mailto:legal@arcel.org).
-
-[app]: https://cla-assistant.io/
+The alternative third-party path ([CLA Assistant](https://cla-assistant.io/))
+remains available if the org ever prefers it.
