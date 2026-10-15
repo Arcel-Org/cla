@@ -92,15 +92,17 @@ survives any termination of your relationship with Arcel or of any Project.
 
 ## How to sign
 
-**If the Project has the [CLA Assistant](https://cla-assistant.io/) bot
-installed**, signing is handled automatically when you open a pull request —
-the bot checks your status and, if needed, gives you a one-click link to
-agree to these terms.
+**On a pull request (automatic).** Every Arcel project runs a CLA bot
+(`.github/workflows/cla.yml`) on pull requests. If you haven't signed yet, it
+posts a comment on your PR telling you exactly what to do — reply with the
+phrase it shows (the standard form is `I have read the CLA Document and I
+hereby sign the CLA`). The bot records your GitHub username and marks the
+CLA check green; the PR can't merge until you do.
 
-**Otherwise**, sign by email. Send an email to
-[legal@arcel.org](mailto:legal@arcel.org) from the address associated with
-your GitHub account, with the subject **"CLA — <your GitHub username>"** and
-this text:
+**Otherwise (or if you'd rather not sign in a PR thread)**, sign by email.
+Send an email to [legal@arcel.org](mailto:legal@arcel.org) from the address
+associated with your GitHub account, with the subject **"CLA — <your GitHub
+username>"** and this text:
 
 > I have read the Arcel LLC Contributor License Agreement at
 > https://github.com/Arcel-Org/cla/blob/main/cla.md and agree to its terms.
